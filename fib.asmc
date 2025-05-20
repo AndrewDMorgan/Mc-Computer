@@ -1,0 +1,21 @@
+# loading the initial values
+Stck, flsh                   #0 : flushing the stack
+move, NOP , DAX , 1          #1 : current
+move, NOP , 0x01, 0          #2 : last
+# looping while less than 233
+move, 0x01, DBX              #3 : moving the last to B
+OP  , ADD , DAX , DBX , OAX  #4 : adding the last and current
+OP  , NOP , DAX , DAX , OBX  #5 : moving the current to the output
+move, OBX , 0x01             #6 : replacing the last with the current
+move, OAX , DAX              #7 : replacing the current with the new value
+Stck, psh , OAX              #8 : moving the new result onto the stack
+# check if complete  (233 is the final number before it overflows)
+move, NOP , DCX , 233        #9 : moving the max value into C
+OP  , EQ  , DAX , DCX , OCX  #10: comparing (2 means >= 233; 1 means < 233)
+move, OCX , DCX              #11: moving the result to C (bus2)
+OP  , ADD , PAX , DCX , OCX  #12: adding the conditional to the line number(bus1)
+move, OCX , PAX              #13: updating the line number
+move, NOP , PAX , 2          #14: (false) moving to line 2 (will be incremented resulting in line 3)
+NOP                          #15: (true) end of the loop
+Stck, flsh                   #16: flushing the stack (just to test if it works)
+END                          #17: ending the program

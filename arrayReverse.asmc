@@ -1,0 +1,72 @@
+# creating the list
+move, NOP , 0x01, 14         #0 : the size of the array
+move, NOP , 0x02, 1          #1 : ordered 1-14 being placed in the array
+move, NOP , 0x03, 2          #2 : ordered 1-14 being placed in the array
+move, NOP , 0x04, 3          #3 : ordered 1-14 being placed in the array
+move, NOP , 0x05, 4          #4 : ordered 1-14 being placed in the array
+move, NOP , 0x06, 5          #5 : ordered 1-14 being placed in the array
+move, NOP , 0x07, 6          #6 : ordered 1-14 being placed in the array
+move, NOP , 0x08, 7          #7 : ordered 1-14 being placed in the array
+move, NOP , 0x09, 8          #8 : ordered 1-14 being placed in the array
+move, NOP , 0x0A, 9          #9 : ordered 1-14 being placed in the array
+move, NOP , 0x0B, 10         #10: ordered 1-14 being placed in the array
+move, NOP , 0x0C, 11         #11: ordered 1-14 being placed in the array
+move, NOP , 0x0D, 12         #12: ordered 1-14 being placed in the array
+move, NOP , 0x0E, 13         #13: ordered 1-14 being placed in the array
+move, NOP , 0x0F, 14         #14: ordered 1-14 being placed in the array
+move, NOP , PAX , 49         #15: jumping past the function definition
+
+# ================== the function for ordering the list ==================
+    # DAX: array size
+    # AX : current pointer
+    Stck, pop , IAX              #16: getting the pointer to the array
+    Stck, pop , 0x11             #17: getting the return line number
+    move, IAX , DAX              #18: getting the size (dereferencing the initial pointer)
+    pnt , MOVE, IAX , AX         #19: moving the pointer to a register
+    # main loop
+        # DCX: dereferenced pointer (array value)
+        move, NOP , DBX , 1          #20: adding a 1 for incrementing
+        OP  , ADD , DBX , AX  , OAX  #21: moving the pointer right by 1
+        move, OAX , AX               #22: updating the pointer
+        move, OAX , IBX              #23: moving the pointer to indirect B
+        move, IBX , DCX              #24: dereferencing the pointer (getting array[i])
+        OP  , NOP , DCX , DCX , OAX  #25: moving the deref to the output reg
+        Stck, psh , OAX              #26: pushing the value to the stack (array[i])
+        # checking if the iteration is complete (checking if pos-size >= size)
+        pnt , MOVE, IBX , DCX        #27: moving the pointer to B
+        OP  , LESS, DAX , DCX , OBX  #28: calculating the dif
+        move, OBX , DCX              #29: moving the result to C
+        OP  , ADD , DCX , PAX , OBX  #30: calculating the new line number
+        move, OBX , PAX              #31: jumping to the results
+        move, NOP , PAX , 19         #32: (false) jumping to the loop start
+    pnt , MOVE, IBX , DBX        #33: getting the address
+    OP  , SUBR, DBX , DAX , OAX  #34: finding the original address
+    move, OAX , AX               #35: replacing the current pointer with the base
+    # reversal loop (re-placing the array values)
+        # IBX: current pointer
+        move, NOP , DBX , 1          #36: 1 for incrementing
+        OP  , ADD , DBX , AX  , OAX  #37: incrementing the pointer
+        move, OAX , AX               #38: updating the pointer
+        move, OAX , IBX              #39: saving the pointer to indirect B
+        Stck, pop , DCX              #40: getting the value
+        OP  , NOP , DCX , DCX , OAX  #41: moving the value to the output reg
+        pnt , WRT , IBX , OAX        #42: writing the new value
+        # checking if the loop is complete
+        pnt , MOVE, IBX , DCX        #43: moving the pointer to B
+        OP  , LESS, DAX , DCX , OBX  #44: calculating the dif
+        move, OBX , DCX              #45: moving the result to C
+        OP  , ADD , DCX , PAX , OBX  #46: calculating the new line number
+        move, OBX , PAX              #47: jumping to the results
+        move, NOP , PAX , 35         #48: (false) jumping to the loop start
+    move, 0x11, PAX              #49: jumping to before the function call
+
+# ================== the main execution code ==================
+Stck, flsh                   #50: clearing the stack
+move, NOP , DBX , 6          #51: for incrementing the line number correctly
+OP  , ADD , DBX , PAX , OAX  #52: getting the new line number
+Stck, psh , OAX              #53: pushing the line number to the stack
+move, NOP , DBX , 1          #54: getting the address of the array
+OP  , NOP , DBX , DBX , OAX  #55: moving the address to an output reg
+Stck, psh , OAX              #56: pushing the address to the stack
+move, NOP , PAX , 15         #57: calling the function
+END                          #58: ending the program

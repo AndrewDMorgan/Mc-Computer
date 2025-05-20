@@ -1,0 +1,45 @@
+Registers:
+    Bus 1: AX , DAX
+    Bus 2: DBX, DCX
+    output: OAX, OBX, OCX
+    pointers: IAX, IBX
+Memory:
+    Ram: 0x01 through 0x22
+
+Opcodes:
+    1: OP  , code, read1, read2, result
+        codes:
+            * ADD
+            * SUB
+            * NOP aka no-operation (just moves the values through and out)
+    2: move, read, destination, optional number
+        Moving a pointer to a register automatically dereferences it
+
+    3: Stck, operation, read/write address/register
+        Operations:
+            * psh : pushes a value to the stack
+            * pop : pops a value from the stack
+            * flsh: flushes/clears the stack
+            * size: gets the current size of the stack (number of elements)
+    4: pnt , operation code, indirect register, write address/register:
+        Operations:
+            * MOVE: moves the pointer (without dereferencing)
+            * WRT : writes a value to the memory the pointer is pointing at
+
+# ========================================= code =========================================
+move, NOP , DAX , 1              # moving 1 to the DAX register (DAX outputs to bus 1)
+move, NOP , DBX , 5
+OP  , ADD , DAX , DBX , OBX
+move, OBX, 0x05
+move, NOP , IAX , 5
+move, NOP , 0x06, 5
+pnt , MOVE, IAX, DCX
+OP  , ADD , DCX , DAX , OAX
+move, OAX , IAX
+pnt , WRT , IAX , OAX
+pnt , MOVE, IAX , DCX
+OP  , NOP , DCX , DCX, OAX
+Stck, psh , OAX
+Stck, pop , IBX
+move, IBX , DCX
+END

@@ -1,0 +1,181 @@
+{
+    "name": "Minecraft Assembly",
+    "scopeName": "source.asmc",
+    "patterns": [
+        {
+            "name": "comment.line.number-sign.asmc",
+            "match": "#.*$"
+        },
+        {
+            "name": "keyword.instruction_type.asmc",
+            "match": "move"
+        },
+        {
+            "name": "keyword.instruction_type.asmc",
+            "match": "OP"
+        },
+        {
+            "name": "keyword.instruction_type.asmc",
+            "match": "Stck"
+        },
+        {
+            "name": "keyword.instruction_type.asmc",
+            "match": "pnt"
+        },
+        {
+            "name": "keyword.instruction_type.asmc",
+            "match": "NOP"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "DAX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "DBX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "DCX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "AX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "PAX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "OAX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "OBX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "OCX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "IAX"
+        },
+        {
+            "name": "variable.register.asmc",
+            "match": "IBX"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "NOP"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "ADD"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "SUB"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "LEFT"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "RGHT"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "NOT"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "XOR"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "XNOR"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "AND"
+        },
+        {
+            "name": "keyword.operator.math.asmc",
+            "match": "MULT"
+        },
+        {
+            "name": "keyword.operator.logical.asmc",
+            "match": "EQ"
+        },
+        {
+            "name": "keyword.operator.logical.asmc",
+            "match": "LESS"
+        },
+        {
+            "name": "keyword.operator.logical.asmc",
+            "match": "GRTR"
+        },
+        {
+            "name": "keyword.operator.logical.asmc",
+            "match": "LSEQ"
+        },
+        {
+            "name": "keyword.operator.logical.asmc",
+            "match": "GREQ"
+        },
+        {
+            "name": "keyword.operator.logical.asmc",
+            "match": "NEQ"
+        },
+        {
+            "name": "Operator.operator.logical.asmc",
+            "match": "NAND"
+        },
+        {
+            "name": "keyword.control.asmc",
+            "match": "psh"
+        },
+        {
+            "name": "keyword.control.asmc",
+            "match": "pop"
+        },
+        {
+            "name": "keyword.control.asmc",
+            "match": "flsh"
+        },
+        {
+            "name": "keyword.control.asmc",
+            "match": "size"
+        },
+        {
+            "name": "keyword.control.asmc",
+            "match": "last"
+        },
+        {
+            "name": "support.function.asmc",
+            "match": "WRT"
+        },
+        {
+            "name": "support.function.asmc",
+            "match": "MOVE"
+        },
+        {
+            "name": "variable.address.asmc",
+            "match": "0x.*$"
+        },
+        {
+            "name": "constant.numeric.asmc",
+            "match": "\\b\\d+\\b"
+        },
+        {
+            "name": "punctuation.separator.comma.asmc",
+            "match": ","
+        }
+    ],
+    "repository": {},
+    "fileTypes": ["asmc"],
+    "uuid": "baf39a68-bc51-4c93-950f-c8f173a01234"
+}

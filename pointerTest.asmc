@@ -1,0 +1,10 @@
+move, NOP , 0x0A, 9         #0: moving 9 to address 10
+move, NOP , 0x0B, 1         #1: moving 1 to address 11
+move, NOP , IAX , 10        #2: moving 10 to IAX
+move, IAX , DAX             #3: getting the value being pointed to
+pnt , MOVE, IAX , AX        #4: moving the pointer into reg AX
+move, NOP , DBX , 1         #5: moving 1 to B
+OP  , ADD , AX  , DBX , ABX #6: adding B and AX
+OP  , NOP , ABX , ABX , OAX #7: moving ABX to OAX (just testing the B accumulator)
+move, OAX , IBX             #8: moving the output to an indirect reg
+pnt , WRT , IBX , OAX       #9: writing the pointer to the address being pointed to....

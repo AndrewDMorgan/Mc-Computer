@@ -1,0 +1,20 @@
+move, NOP , DAX , 5     # putting 5 into register A
+move, NOP , 0x01, 8     # putting 1 into the first address
+move, NOP , IAX , 1     # pointer to address 1
+I can just write right? (ugly though)
+move, IAX, DBX               # the value IAX is pointing to into register B
+OP  , AND , DAX , DBX , OAX  # Adding registers A and B to output A
+move, OAX , DAX
+move, NOP , DBX , 1
+OP  , ADD, DAX, DBX, OAX
+
+Testing the conditional statements
+move, OAX , DAX
+move, NOP , DBX , 3
+OP  , EQ  , DAX , DBX, OAX
+move, OAX , DAX
+OP  , ADD , DAX, PAX, OAX   # line 12
+move, OAX , PAX
+move, NOP , PAX , 15  # false
+move, NOP , 0x0A, 27  # true
+NOP

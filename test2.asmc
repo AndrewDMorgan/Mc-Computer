@@ -1,0 +1,7 @@
+move, NOP , DAX , 34          #0:
+OP  , NOP , DAX , DAX, OAX    #1:
+Stck, psh , OAX               #2:
+Stck, size, DAX               #3:
+move, NOP , DBX , 3           #4:
+OP  , ADD , DAX , DBX , OAX   #5:
+NOP                           #6:
